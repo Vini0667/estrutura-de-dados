@@ -46,5 +46,7 @@ int main (void) {
         printf("\n"); // Ignore, é somente para pular mais uma linha mesmo
     }
 
+    free(stack.stack);
+
     return 0;
 }
