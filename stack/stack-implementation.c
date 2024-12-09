@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h> // Este código esta duplicado, comentei no stack.h
-#include </home/vini/Documents/data-structure/stack/stack.h> // Importa a biblioteca (COLOCAR O CAMINHO COMPLETO DO SEU PC)
+#include </mnt/c/Users/Not-Vini/Documents/data-structure/stack/stack.h> // Importa a biblioteca (COLOCAR O CAMINHO COMPLETO DO SEU PC)
 // Ainda sobre a biblioteca, não sei como posso invoca-la igual as acima
 // Muito provavelmente transferindo a mesma para a pasta de bibliotecas C, mas para esse exemplo basta.
 
 int main (void) {
     struct Stack stack = {
         (int*)malloc(STACK_SIZE * sizeof(int)), // Calcula o tamanho de memória a ser alocado para os números definidos em STACK_SIZE e faz um cast para inteiro
-        MIN_VALUE_TOP
+        INITIAL_VALUE_TOP
     };
 
     int menu = 1, i, result, random_number;
@@ -21,7 +21,7 @@ int main (void) {
             case 1:
                 printf("Digite o número que quer adicionar ao topo: ");
                 scanf(" %i", &random_number);
-                result = putOnTop(&stack, random_number); // Lembrar do & para passar a posição da memória da variável e não o conteúdo.
+                result = putAtTheTop(&stack, random_number); // Lembrar do & para passar a posição da memória da variável e não o conteúdo.
             break;
 
             case 2:

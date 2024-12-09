@@ -4,9 +4,10 @@
 // Define as constantes dos códigos
 
 const int STACK_SIZE = 5;
+const int INITIAL_VALUE_TOP = -1;
+const int ERROR_STACK_IS_EMPTY = -2;
+const int ERROR_STACK_IS_FULL = -3;
 const int SUCCESS_OPERATION = 0;
-const int ERROR_OPERATION = -10;
-const int MIN_VALUE_TOP = -1;
 
 struct Stack { // Define nossa Stack
     int *stack;
@@ -25,17 +26,17 @@ int verifyStackIsVoid (struct Stack stack); // Aqui é somente uma inicializaç�
 
 extern inline int verifyStackIsFull (struct Stack stack) { // Ver depois o funcionamento do `inline`, pois ainda gera dúvidas
     if (stack.top == STACK_SIZE - 1) {
-        return SUCCESS_OPERATION;
+        return ERROR_STACK_IS_FULL;
     } else {
-        return ERROR_OPERATION;
+        return SUCCESS_OPERATION;
     }
 }
 
-extern inline int verifyStackIsVoid (struct Stack stack) {
-    if (stack.top == -1) {
-        return SUCCESS_OPERATION;
+extern inline int verifyStackIsEmpty (struct Stack stack) {
+    if (stack.top == INITIAL_VALUE_TOP) {
+        return ERROR_STACK_IS_EMPTY;
     } else {
-        return ERROR_OPERATION;
+        return SUCCESS_OPERATION;
     }
 }
 
@@ -51,9 +52,9 @@ extern inline int verifyTop (struct Stack stack) {
 
 // Abaixo estão as funções de empilhar e desempilhar, ambas bem simples
 
-extern inline int putOnTop (struct Stack* stack, int data) {
-    if (verifyStackIsFull(*stack) == SUCCESS_OPERATION) {
-        return ERROR_OPERATION;
+extern inline int putAtTheTop (struct Stack* stack, int data) {
+    if (verifyStackIsFull(*stack) == ERROR_STACK_IS_FULL) {
+        return ERROR_STACK_IS_FULL;
     } else {
         stack->top++;
         stack->stack[stack->top] = data;
@@ -62,8 +63,8 @@ extern inline int putOnTop (struct Stack* stack, int data) {
 }
 
 extern inline int unstack (struct Stack* stack) {
-    if (verifyStackIsVoid(*stack) == SUCCESS_OPERATION) {
-        return ERROR_OPERATION;
+    if (verifyStackIsEmpty(*stack) == ERROR_STACK_IS_EMPTY) {
+        return ERROR_STACK_IS_EMPTY;
     } else { 
         int result = stack->stack[stack->top];
         stack->stack[stack->top] = 0;
