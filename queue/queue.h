@@ -29,15 +29,10 @@ int verifyQueueIsEmpty (int endQueue) {
 }
 
 void organizeQueue (struct Queue *queue) {
-    // if () {
-    // 
-    //
-    //     int aux, i;
-    //
-    //     for (i = QUEUE_SIZE; i < QUEUE_SIZE; i++) {
-    //         queue->queue[i];
-    //     }
-    // }
+    int i;
+    for (i = 0; i < queue->end; i++) {
+        queue->queue[i] = queue->queue[i + 1];
+    }
 }
 
 int putAtTheEnd (struct Queue *queue, int value) {
@@ -50,15 +45,18 @@ int putAtTheEnd (struct Queue *queue, int value) {
     }
 }
 
-
 int unqueue (struct Queue *queue) {
     if (verifyQueueIsEmpty(queue->end) == ERROR_EMPTY_QUEUE) {
         return ERROR_EMPTY_QUEUE;
     } else {
         queue->end--;
         int value = queue->queue[INITIAL_VALUE_QUEUE + 1];
-        organizeQueue(queue);
-        return value;
+        if (queue->end == INITIAL_VALUE_QUEUE) {
+             return value;  
+        } else {
+            organizeQueue(queue);
+            return value;
+        }
     }
 }
 
