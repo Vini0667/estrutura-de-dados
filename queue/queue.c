@@ -1,51 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-const int QUEUE_SIZE = 5;
-const int INITIAL_VALUE_QUEUE = -1;
-const int ERROR_EMPTY_QUEUE = -1;
-const int ERROR_QUEUE_FULL = -2;
-const int SUCCESS_OPERATION = 0;
-
-struct Queue {
-    int *queue;
-    int end;
-};
-
-int verifyQueueIsFull (int endQueue) {
-    if (endQueue == QUEUE_SIZE - 1) {
-        return SUCCESS_OPERATION;
-    } else {
-        return ERROR_QUEUE_FULL;
-    }
-}
-
-int verifyQueueIsEmpty (int endQueue) {
-    if (endQueue == INITIAL_VALUE_QUEUE) {
-        return SUCCESS_OPERATION;
-    } else {
-        
-    }
-}
-
-void organizeQueue (struct Queue *queue) {
-
-}
-
-int putAtTheEnd (struct Queue *queue, int value) {
-    if (verifyQueueIsFull(queue->end) == SUCCESS_OPERATION) {
-        return ERROR_QUEUE_FULL;
-    } else {
-        queue->end++;
-        queue->queue[queue->end] = value;
-        return SUCCESS_OPERATION;
-    }
-}
-
-
-int unqueue (struct Queue *queue) {
-
-}
+#include "queue.h"
 
 int main (void) {
     struct Queue queue = {
@@ -53,11 +8,41 @@ int main (void) {
         INITIAL_VALUE_QUEUE
     };
 
-    int i;
+    int i, menu, num, result;
 
-    for (i = 0; i < QUEUE_SIZE; i++) {
-        printf("\n\n%i\n\n", queue.queue[i]);
-    }
+    do {
+        printf("O que você quer?\n");
+        printf("0 - Sair\n1 - Adicionar um número\n2 - Retirar o número\n3 - Valor de end\n");
+        scanf(" %d", &menu);
+
+        switch (menu) {
+            case 1:
+                printf("Digite qual número que adicionar: ");
+                scanf(" %d", &num);
+                result = putAtTheEnd(&queue, num);
+            break;
+
+            case 2:
+                result = unqueue(&queue);
+                printf("Número retirado: %d\n\n", result);
+            break;
+
+            case 3:
+                result = verifyEnd(&queue);
+            break;
+
+            default:
+                break;
+        }
+
+        printf("\nResultado: %d\n\n", result);
+            
+        printf("Exibição da fila atual:\n\n");
+
+        for (i = verifyEnd(&queue); i >= 0; i--) {
+            printf("\n%d[%d]\n\n", queue.queue[i], i);
+        }
+    } while (menu != 0);
     
 
     return 0;

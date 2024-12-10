@@ -1,6 +1,7 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
+#include <stdio.h>
 const int QUEUE_SIZE = 5;
 const int INITIAL_VALUE_QUEUE = -1;
 const int ERROR_EMPTY_QUEUE = -1;
@@ -28,6 +29,10 @@ int verifyQueueIsEmpty (int endQueue) {
     }
 }
 
+int verifyEnd (struct Queue *queue) {
+    return queue->end;
+}
+
 void organizeQueue (struct Queue *queue) {
     int i;
     for (i = 0; i < queue->end; i++) {
@@ -36,6 +41,7 @@ void organizeQueue (struct Queue *queue) {
 }
 
 int putAtTheEnd (struct Queue *queue, int value) {
+    printf("Enter here");
     if (verifyQueueIsFull(queue->end) == ERROR_QUEUE_FULL) {
         return ERROR_QUEUE_FULL;
     } else {
